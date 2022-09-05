@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public class Transacao {
 
-	protected  ArrayList<Locacao> alugueis;
+	protected ArrayList<Locacao> alugueis;
 	
 	public Transacao() {
-		
 		alugueis= new ArrayList<Locacao>();
 	}
 	

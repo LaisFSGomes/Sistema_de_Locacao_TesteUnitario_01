@@ -33,7 +33,10 @@ public class TransacaoTest {
 
 		locacao1.alugar(new Cliente("Izaias", 2), filme1);
 		locacao2.alugar(new Cliente("Thiago", 3), filme2);
-		
+		locacao1.setDataLocacao("04/09/2022");
+		locacao1.setHoraLocacao("08:43");
+		locacao1.setDataLocacao("06/10/2021");
+		locacao1.setHoraLocacao("10:20");
 
 		transacao = new Transacao();
 	}
