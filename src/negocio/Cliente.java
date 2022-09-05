@@ -6,7 +6,7 @@ public class Cliente {
 	protected int id;
 	protected boolean ativo = true;
 	
-	public Cliente(String nome, int id) {
+	public Cliente(String nome, int id) {	
 		this.nome= nome;
 		this.id= id;
 	}

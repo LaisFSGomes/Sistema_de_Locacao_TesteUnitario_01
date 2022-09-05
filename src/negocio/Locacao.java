@@ -7,13 +7,17 @@ public class Locacao {
 	protected double valorAluguel;
 	protected String dataLocacao;
 	protected String horaLocacao;
+	protected boolean deuCerto;
 	
 	public void alugar(Cliente c, Filme f) {
-		this.cliente = c;
-		this.filme = f;
-		if (cliente.ativo) {
+		if (c.ativo == true) {
 			this.cliente = c;
 			this.filme = f;
+			this.deuCerto = true;
+		} else {
+			this.cliente = null;
+			this.filme = null;
+			this.deuCerto = false;
 		}
 	}
 	public void setValorAluguel(double valorAluguel) {
