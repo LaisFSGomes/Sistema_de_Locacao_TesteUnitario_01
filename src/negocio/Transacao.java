@@ -1,6 +1,8 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Transacao {
 
@@ -46,5 +48,35 @@ public class Transacao {
 			}
 		}
 		return (valor*100)/aux.valorCompra;
+	}
+	
+	public Genero generoMaisAlugado() {
+		int drama = 0; int comedia = 0; int acao = 0; int policial = 0; int animacao = 0;
+		for (Locacao locacao : alugueis) {
+			if (locacao.filme.genero == Genero.DRAMA) {
+				drama = drama+1;
+			} else if(locacao.filme.genero == Genero.COMEDIA) {
+				comedia = comedia+1;
+			}else if(locacao.filme.genero == Genero.ACAO) {
+				acao = acao+1;
+			}else if(locacao.filme.genero == Genero.POLICIAL) {
+				policial = policial+1;
+			}else if(locacao.filme.genero == Genero.ANIMACAO) {
+				animacao = animacao+1;
+			}		
+		}
+		
+		if((drama>=comedia) & (drama>=acao) & (drama>=policial) & (drama>=animacao)) {
+			return Genero.DRAMA;
+		} else if((comedia>=drama) & (comedia>=acao) & (comedia>=policial) & (comedia>=animacao)) {
+			return Genero.COMEDIA;
+		} else if((acao>=comedia) & (acao>=drama) & (acao>=policial) & (acao>=animacao)){
+			return Genero.ACAO;
+		}  else if((policial>=comedia) & (policial>=drama) & (policial>=acao) & (policial>=animacao)){
+			return Genero.POLICIAL;
+		}  else if((animacao>=comedia) & (animacao>=drama) & (animacao>=acao) & (animacao>=policial)){
+			return Genero.ANIMACAO;
+		}
+		return null;
 	}
 }

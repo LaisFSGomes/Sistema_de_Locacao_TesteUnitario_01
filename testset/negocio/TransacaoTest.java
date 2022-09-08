@@ -2,15 +2,10 @@ package negocio;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import negocio.Cliente;
-import negocio.Filme;
-import negocio.Genero;
-import negocio.Locacao;
-import negocio.Transacao;
 
 public class TransacaoTest {
 
@@ -18,6 +13,7 @@ public class TransacaoTest {
 	Locacao locacao1;
 	Locacao locacao2;
 	Locacao locacao3;
+	Locacao locacao4;
 	Filme filme1;
 	Filme filme2;
 	Filme filme3;
@@ -31,6 +27,7 @@ public class TransacaoTest {
 		locacao1 = new Locacao();
 		locacao2 = new Locacao();
 		locacao3 = new Locacao();
+		locacao4 = new Locacao();
 		
 		filme1 = new Filme("300 Spartanus", Genero.ACAO);
 		filme1.valorCompra = 100;
@@ -54,19 +51,28 @@ public class TransacaoTest {
 		locacao1.alugar(cliente_1, filme1);
 		locacao1.setDataLocacao("01/09/2022");
 		locacao1.setHoraLocacao("20:30");
+		locacao1.valorAluguel = 30;
 		
 		locacao2.alugar(cliente_2, filme2);
 		locacao2.setDataLocacao("30/07/2022");
 		locacao2.setHoraLocacao("12:30");
+		locacao2.valorAluguel = 40;
 		
 		locacao3.alugar(cliente_3, filme3); //esse não foi feito
 		locacao3.setDataLocacao("30/07/2022");
 		locacao3.setHoraLocacao("12:30");
+		locacao3.valorAluguel = 20;
+		
+		locacao4.alugar(cliente_2, filme2);
+		locacao4.setDataLocacao("30/07/2022");
+		locacao4.setHoraLocacao("12:30");
+		locacao4.valorAluguel = 20;
 		
 		transacao = new Transacao();
 		transacao.addLocacao(locacao1);
 		transacao.addLocacao(locacao2);
 		transacao.addLocacao(locacao3);
+		transacao.addLocacao(locacao4);
 	}
 
 	@After
@@ -78,55 +84,28 @@ public class TransacaoTest {
 		
 		assertEquals(transacao.alugueis.get(0).cliente.nome, "Caio");
 		assertEquals(transacao.alugueis.get(1).cliente.nome, "Andrea");
-		assertEquals(transacao.alugueis.size(), 2);
+		assertEquals(transacao.alugueis.size(), 3);
 
 		assertTrue("Filme deveria ser selecionado corretamente",transacao.alugueis.get(1).filme.id==2);
-//		assertEquals(150, transacao.valorLocacaoTotal(), 0.1);
 	}
 	@Test
 	public void buscaCliente() {
 		assertTrue(transacao.buscaCliente(1) == cliente_1);
 	} 
 
-
 	@Test
-	public void valorLocacaoTotalTest2() {
-//
-//		transacao.alugueis.add(locacao1);
-//		transacao.alugueis.add(locacao2);
-//		transacao.alugueis.add(locacao2);
-//		assertEquals(200, transacao.valorLocacaoTotal(), 0.1);
+	public void valorLocacaoTotalTest() {
+		assertEquals(200, transacao.valorLocacaoTotal(), 0.1);
 	}
 
 	@Test 
-	public void buscaClienteIdTest() {
-		
-//		transacao.alugueis.add(locacao2);
-//		assertEquals("Thiago",transacao.buscaCliente(3).nome);
+	public void calculoLucroTest() {
+		assertEquals(120.0, transacao.calculoLucro(2), 0.1);
 	}
 	
 	@Test 
-	public void calculoLucroTest() {
-		
-//		locacao2.setValorAluguel(25);
-//		transacao.alugueis.add(locacao2);
-//		
-//		assertEquals(50,transacao.calculoLucro(20),0.01);
-	}
-	public void test1() {
-
-//		assertEquals(Math.PI, 3.14, 0.01);
-//		assertTrue("java".equalsIgnoreCase("Java"));
-//		Filme f =new Filme("a", Genero.ROMANCE);
-//		assertNull(f); // assertNotNull();
-//		Filme f2 =new Filme("a", Genero.ROMANCE);
-//
-//		assertTrue(f==f2);
-//		
-//		assertSame(f, f2); // asserNotSame)();
-//
-//		assertTrue("Comparacao de objetos", f == f2);
-
+	public void filmeMaisAlugadoTest() {
+		assertTrue(transacao.generoMaisAlugado() == Genero.ANIMACAO);
 	}
 
 }
