@@ -20,8 +20,12 @@ public class Locacao {
 			this.deuCerto = false;
 		}
 	}
-	public void setValorAluguel(double valorAluguel) {
-		this.valorAluguel=valorAluguel;
+	public void setValorAluguel(double valorAluguel, Desconto desconto) {
+		if(desconto.genero == this.filme.genero) {
+			this.valorAluguel = valorAluguel - (valorAluguel*desconto.porcentagem);
+		} else {			
+			this.valorAluguel=valorAluguel;
+		}
 	}
 	public void setDataLocacao(String data) {
 		this.dataLocacao = data;

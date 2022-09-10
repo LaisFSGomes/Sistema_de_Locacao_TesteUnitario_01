@@ -53,16 +53,22 @@ public class Transacao {
 	public Genero generoMaisAlugado() {
 		int drama = 0; int comedia = 0; int acao = 0; int policial = 0; int animacao = 0;
 		for (Locacao locacao : alugueis) {
-			if (locacao.filme.genero == Genero.DRAMA) {
-				drama = drama+1;
-			} else if(locacao.filme.genero == Genero.COMEDIA) {
-				comedia = comedia+1;
-			}else if(locacao.filme.genero == Genero.ACAO) {
-				acao = acao+1;
-			}else if(locacao.filme.genero == Genero.POLICIAL) {
-				policial = policial+1;
-			}else if(locacao.filme.genero == Genero.ANIMACAO) {
-				animacao = animacao+1;
+			switch(locacao.filme.genero){
+				case DRAMA: 
+					drama = drama+1;
+					break;
+				case COMEDIA:
+					comedia = comedia+1;
+					break;
+				case ACAO:
+					acao = acao+1;
+					break;
+				case POLICIAL:
+					policial = policial+1;
+					break;
+				case ANIMACAO:
+					animacao = animacao+1;
+					break;
 			}		
 		}
 		

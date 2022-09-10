@@ -21,6 +21,7 @@ public class TransacaoTest {
 	Cliente cliente_2;
 	Cliente cliente_3;
 	Cliente cliente4;
+	Desconto descontoAcao;
 
 	@Before
 	public void setUp() throws Exception {
@@ -107,5 +108,28 @@ public class TransacaoTest {
 	public void filmeMaisAlugadoTest() {
 		assertTrue(transacao.generoMaisAlugado() == Genero.ANIMACAO);
 	}
+	
+	@Test
+	public void descontoTest() {
+		descontoAcao = new Desconto(Genero.ACAO, 0.1);
+		locacao1.setValorAluguel(50, descontoAcao);
+		assertEquals(45, locacao1.valorAluguel,.1);
+	}
+	
+	@Test
+	public void transacaoFilmesFavoristosTest() {
+		FilmesFavoritos listaFilmes = new FilmesFavoritos();
+		listaFilmes.addFilme(filme1);
+		listaFilmes.addFilme(filme3);
+		assertTrue(listaFilmes.buscaFilmeId(1).nome == filme1.nome);
+		assertTrue(listaFilmes.buscaFilmeNome("O PODEROSO CHEFÃO").nome == filme3.nome);
+		
+		Locacao locacao4 = new Locacao();
+		locacao4.alugar(cliente_1, listaFilmes.buscaFilmeId(1));
+		assertTrue(locacao4.filme.nome == filme1.nome);
+		assertTrue(locacao4.cliente.nome == cliente_1.nome);
+		
+	}
+	
 
 }
